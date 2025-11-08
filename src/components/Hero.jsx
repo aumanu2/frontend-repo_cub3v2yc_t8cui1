@@ -1,64 +1,67 @@
 import { Play } from "lucide-react";
+import Spline from "@splinetool/react-spline";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50 via-white to-white pointer-events-none" />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/90 to-white pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Book the perfect seat, every time
+          <span className="inline-flex items-center rounded-full bg-indigo-500/10 text-indigo-300 ring-1 ring-inset ring-indigo-500/30 px-3 py-1 text-xs font-medium">Futuristic Ticketing</span>
+          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Book tickets in a holographic universe
           </h1>
-          <p className="mt-4 text-slate-600 text-lg">
-            Discover showtimes, pick your favorite spot, and check out in seconds. Fully responsive and fast on any device.
+          <p className="mt-4 text-slate-300 text-lg">
+            Glide through showtimes, explore a 3D hologram ticket, and lock in the best seats with a beautiful, responsive experience.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#showtimes" className="inline-flex items-center justify-center rounded-md bg-indigo-600 text-white px-5 py-3 text-sm font-semibold shadow-sm hover:bg-indigo-500">
               Find Showtimes
             </a>
-            <button className="inline-flex items-center gap-2 rounded-md border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+            <button className="inline-flex items-center gap-2 rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white/90 hover:bg-white/5">
               <Play className="w-4 h-4" />
               How it works
             </button>
           </div>
-          <div className="mt-8 flex items-center gap-6 text-sm text-slate-600">
+          <div className="mt-8 flex items-center gap-6 text-sm text-slate-300">
             <div>
-              <p className="font-semibold text-slate-900">50k+</p>
+              <p className="font-semibold text-white">50k+</p>
               <p>Seats booked</p>
             </div>
             <div>
-              <p className="font-semibold text-slate-900">4.9/5</p>
+              <p className="font-semibold text-white">4.9/5</p>
               <p>User rating</p>
             </div>
           </div>
         </div>
-        <div className="relative">
-          <div className="aspect-[4/3] rounded-xl border border-slate-200 bg-white shadow-sm p-4">
-            <div className="h-full grid grid-cols-8 grid-rows-6 gap-2">
-              {Array.from({ length: 48 }).map((_, i) => {
-                const booked = [4, 5, 12, 13, 22, 30, 35].includes(i);
-                const vip = i < 8;
-                return (
-                  <div
-                    key={i}
-                    className={`rounded-md flex items-center justify-center text-[10px] md:text-xs select-none border transition ${
-                      booked
-                        ? "bg-slate-200 border-slate-300 text-slate-500"
-                        : vip
-                        ? "bg-amber-50 border-amber-200 text-amber-700"
-                        : "bg-indigo-50 border-indigo-200 text-indigo-700"
-                    }`}
-                  >
-                    {String.fromCharCode(65 + Math.floor(i / 8))}
-                    {1 + (i % 8)}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <p className="mt-3 text-center text-xs text-slate-500">Preview of our interactive seat map</p>
+
+        <div className="relative h-[420px] md:h-[520px] rounded-2xl border border-white/10 bg-black/60 shadow-2xl overflow-hidden">
+          <Spline scene="https://prod.spline.design/zks9uYILDPSX-UX6/scene.splinecode" style={{ width: "100%", height: "100%" }} />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+        </div>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-6 md:-mt-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <ImageCard src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop" title="Sci‑Fi Saga" />
+          <ImageCard src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1200&auto=format&fit=crop" title="Indie Gem" />
+          <ImageCard src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1200&auto=format&fit=crop" title="Comedy Night" />
+          <ImageCard src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop" title="Action Blast" />
         </div>
       </div>
     </section>
+  );
+}
+
+function ImageCard({ src, title }) {
+  return (
+    <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur">
+      <img src={src} alt={title} className="h-36 w-full object-cover transition duration-500 group-hover:scale-105" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+      <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+        <p className="text-white text-sm font-medium drop-shadow">{title}</p>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white ring-1 ring-white/20">Now Showing</span>
+      </div>
+    </div>
   );
 }
